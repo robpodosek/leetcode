@@ -9,11 +9,25 @@ class TreeNode:
         self.right = None
 
 
-def print_tree(node: TreeNode) -> None:
+def print_tree_pre_order(node: TreeNode) -> None:
     if node:
-        print_tree(node.left)
         print(node.value, end=" ")
-        print_tree(node.right)
+        print_tree_pre_order(node.left)
+        print_tree_pre_order(node.right)
+
+
+def print_tree_in_order(node: TreeNode) -> None:
+    if node:
+        print_tree_in_order(node.left)
+        print(node.value, end=" ")
+        print_tree_in_order(node.right)
+
+
+def print_tree_post_order(node: TreeNode) -> None:
+    if node:
+        print_tree_post_order(node.left)
+        print_tree_post_order(node.right)
+        print(node.value, end=" ")
 
 
 # Construct a sample binary tree
@@ -31,5 +45,11 @@ root.left.right = TreeNode(3)
 root.right.left = TreeNode(5)
 root.right.right = TreeNode(7)
 
-print("Printing Tree...")
-print_tree(root)
+print("Printing tree using pre-order traversal..")
+print_tree_pre_order(root)
+
+print("\nPrinting tree using in-order traversal..")
+print_tree_in_order(root)
+
+print("\nPrinting tree using post-order traversal..")
+print_tree_post_order(root)
