@@ -7,23 +7,22 @@
 # @lc code=start
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        start, end = 0, len(s) - 1
-        s = s.lower()
-        while (start < end):
+        left, right = 0, len(s) - 1
 
-            # skip past non alphanum
-            while start < end and not s[start].isalnum():
-                start += 1
-            while start < end and not s[end].isalnum():
-                end -= 1
+        while left < right:
+            # Skip past punctuation.
+            # Although these are nested loops it's still O(n) because the points are only advancing in one direction toward the center. This means it also has O(1) space complexity.
+            while left < right and not s[left].isalnum():
+                left += 1
+            while left < right and not s[right].isalnum():
+                right -= 1
 
-            # check for mismatch
-            if s[start].lower() != s[end].lower():
+            # Compare the ends
+            if s[left].lower() != s[right].lower():
                 return False
+            left += 1
+            right -= 1
 
-            # advance ptrs
-            start += 1
-            end -= 1
         return True
 
 # @lc code=end
