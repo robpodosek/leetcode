@@ -15,7 +15,7 @@ class ListNode:
 class Solution:
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
         # dummy is a placeholder where dummy.next always stays pointed to the head of the list while curr advances
-        dummy = curr = ListNode()
+        head = curr = ListNode()
 
         while list1 and list2:
             if list1.val < list2.val:
@@ -26,8 +26,8 @@ class Solution:
                 list2 = list2.next  # we used up the list2 node so advance it
             curr = curr.next  # always advance the current node pointer
 
-        curr.next = list1 if list1 else list2
+        curr.next = list1 or list2
 
-        return dummy.next
+        return head.next
 
 # @lc code=end
