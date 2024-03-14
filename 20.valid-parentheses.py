@@ -7,24 +7,24 @@
 # @lc code=start
 class Solution:
     def isValid(self, s: str) -> bool:
+        # Make sure there's an even amount
         if len(s) % 2 != 0:
             return False
 
-        pairMap = {
-            ')': '(',
-            '}': '{',
-            ']': '['
+        stack = []
+        pairs = {
+            '(': ')',
+            '{': '}',
+            '[': ']'
         }
 
-        stack = []
-
-        for c in s:
-            if c not in pairMap:
-                stack.append(c)
-                continue
-            if not stack or stack.pop() != pairMap[c]:
+        for bracket in s:
+            if bracket in pairs:
+                stack.append(bracket)
+            elif not stack or pairs[stack.pop()] != bracket:
                 return False
 
         return not stack
+
 
 # @lc code=end
