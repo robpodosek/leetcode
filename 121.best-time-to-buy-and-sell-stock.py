@@ -12,7 +12,9 @@ class Solution:
         minPrice = prices[0]
 
         for price in prices:
+            # Simply update the min price if the current price is less than the current min.
             minPrice = min(minPrice, price)
+            # Then check if the lowest price encountered so far yields a greater profit with the current days price.
             maxProfit = max(maxProfit, price - minPrice)
 
         return maxProfit
