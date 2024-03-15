@@ -5,18 +5,23 @@
 #
 
 # @lc code=start
+
+from collections import defaultdict
+
+
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        if len(s) != len(t):
-            return False
+        chars = defaultdict(int)
 
-        sMap, tMap = {}, {}
+        for c in s:
+            chars[c] += 1
+        for c in t:
+            chars[c] -= 1
 
-        for i in range(len(s)):
-            print(s[i], t[i])
-            sMap[s[i]] = sMap.get(s[i], 0) + 1
-            tMap[t[i]] = tMap.get(t[i], 0) + 1
-        return sMap == tMap
+        for val in chars.values():
+            if val != 0:
+                return False
 
+        return True
 
 # @lc code=end
