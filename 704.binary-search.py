@@ -10,17 +10,13 @@ class Solution:
         l, r = 0, len(nums) - 1
 
         while l <= r:
-            # Take half the distance between them,
-            # add it to the left.
-            # This prevents overflow when adding large numbers,
-            # i.e. (l + r) // 2
-            m = l + (r - l) // 2
-            if target < nums[m]:
-                r = m - 1
-            elif target > nums[m]:
+            m = (r + l) // 2
+            if nums[m] == target:
+                return m
+            elif nums[m] < target:
                 l = m + 1
             else:
-                return m
+                r = m - 1
 
         return -1
 
