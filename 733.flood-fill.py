@@ -77,11 +77,25 @@ class Solution:
         self.dfs(image, sr, sc-1, color, oldColor)
         self.dfs(image, sr, sc+1, color, oldColor)
 
+    def bfs(self, image, sr, sc, color, oldColor):
+        q = [(sr, sc)]
+        while q:
+            i, j = q.pop(0)
+            if i < 0 or i >= len(image) or j < 0 or j >= len(image[0]) or image[i][j] != oldColor:
+                continue
+
+            image[i][j] = color
+            q.append((i-1, j))
+            q.append((i+1, j))
+            q.append((i, j-1))
+            q.append((i, j+1))
+
     def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
         oldColor = image[sr][sc]
         if color == oldColor:
             return image
-        self.dfs(image, sr, sc, color, oldColor)
+        # self.dfs(image, sr, sc, color, oldColor)
+        self.bfs(image, sr, sc, color, oldColor)
         return image
 
 # @lc code=end
